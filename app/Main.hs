@@ -4,7 +4,7 @@ module Main (main) where
 
 import Data.Text.IO qualified as T
 import Data.Text qualified as T
-import MyLib qualified (someFunc)
+import Lexer qualified (someFunc)
 import System.Environment
 import System.IO (hFlush, stdout)
 import Control.Exception (catch, IOException)
@@ -14,7 +14,7 @@ import Prelude hiding (readFile)
 scanner :: T.Text -> IO ()
 scanner src = do
   putStr $ show src <> "  << "
-  MyLib.someFunc
+  Lexer.someFunc
 
 main :: IO ()
 main = do
