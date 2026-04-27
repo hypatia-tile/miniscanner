@@ -3,6 +3,7 @@
 module Main (main) where
 
 import Data.Text.IO qualified as T
+import Data.Text qualified as T
 import MyLib qualified (someFunc)
 import System.Environment
 import System.IO (hFlush, stdout)
@@ -10,7 +11,7 @@ import Control.Exception (catch, IOException)
 import System.IO.Error (isEOFError)
 import Prelude hiding (readFile)
 
-scanner :: (Show a) => a -> IO ()
+scanner :: T.Text -> IO ()
 scanner src = do
   putStr $ show src <> "  << "
   MyLib.someFunc
@@ -33,7 +34,7 @@ repl = do
   putStr "> "
   hFlush stdout
   continue <- (do
-    line <- getLine
+    line <- T.getLine
     scanner line
     return True) `catch` handler
   if continue then repl else return ()
